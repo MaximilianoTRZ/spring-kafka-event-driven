@@ -17,6 +17,6 @@ public class KafkaPaymentProducer {
 
     public void sendPayment(PaymentRequest request) {
         String message = gson.toJson(request);
-        kafkaTemplate.send("payments", request.paymentId(), message);
+        kafkaTemplate.send("payment.confirmed", request.paymentId(), message);
     }
 }

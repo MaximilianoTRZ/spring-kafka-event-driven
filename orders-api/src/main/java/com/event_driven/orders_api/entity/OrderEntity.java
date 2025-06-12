@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class Order {
+@Table(name = "purchase_order")
+public class OrderEntity {
     @Id
     private String paymentId;
     private String userId;
@@ -12,9 +13,9 @@ public class Order {
     private double amount;
     private LocalDateTime createdAt;
 
-    public Order() {}
+    public OrderEntity() {}
 
-    public Order(String paymentId, String userId, String product, double amount, LocalDateTime createdAt) {
+    public OrderEntity(String paymentId, String userId, String product, double amount, LocalDateTime createdAt) {
         this.paymentId = paymentId;
         this.userId = userId;
         this.product = product;

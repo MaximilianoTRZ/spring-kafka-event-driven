@@ -16,11 +16,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: order-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+logging:
+  level:
+    org.springframework.kafka.listener: DEBUG
+    org.apache.kafka.clients.consumer: DEBUG
+
 

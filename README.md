@@ -11,7 +11,7 @@ Este proyecto es una prueba de concepto de comunicación basada en eventos utili
 ## 🧱 Arquitectura
 
 ```plaintext
-[payments-api] --(Kafka Topic: payment)--> [orders-api]
+[payments-api] --(Kafka Topic: payment.confirmed)--> [orders-api]
 ```
 
 - Comunicación asincrónica usando Kafka.
@@ -83,7 +83,7 @@ cd orders-api
 ## 🔁 Flujo del evento
 
 1. Se realiza un `POST /api/payments` en `payments-api`.
-2. Este microservicio produce un evento al topic `payment`.
+2. Este microservicio produce un evento al topic `payment.confirmed`.
 3. `orders-api` escucha ese topic y persiste la orden.
 4. Podés consultar las órdenes con: `GET /api/orders`.
 
@@ -134,8 +134,3 @@ docker system prune -af
 - Implementar retries y manejo de errores.
 - Desplegar en AWS usando Terraform.
 
----
-
-## 📜 Licencia
-
-MIT © [MaximilianoTRZ](https://github.com/MaximilianoTRZ)

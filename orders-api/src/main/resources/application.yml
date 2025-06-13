@@ -6,7 +6,7 @@ spring:
   application:
     name: orders-api
   datasource:
-    url: jdbc:h2:mem:ordersdb
+    url: jdbc:h2:mem:orderentitydb
     driverClassName: org.h2.Driver
     username: sa
     password:
@@ -19,12 +19,12 @@ spring:
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
-      group-id: order-group
+      group-id: orders-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-logging:
-  level:
-    org.springframework.kafka.listener: DEBUG
-    org.apache.kafka.clients.consumer: DEBUG
+#logging:
+#  level:
+#    org.springframework.kafka.listener: DEBUG
+#    org.apache.kafka.clients.consumer: DEBUG
 
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+
 @Service
 public class KafkaOrderConsumer {
 
@@ -19,8 +20,20 @@ public class KafkaOrderConsumer {
         this.orderRepository = orderRepository;
     }
 
-    @KafkaListener(topics = "payment", groupId = "order-group")
+    @KafkaListener(topics = "payment.confirmed", groupId = "orders-group")
     public void consume(String message) {
+
+        JsonObject json = gson.fromJson(message, JsonObject.class);
         System.out.println("🟢 Mensaje recibido de Kafka: " + message);
+
+        OrderEntity order = new OrderEntity(
+                json.get("paymentId").getAsString(),
+                json.get("userId").getAsString(),
+                json.get("product").getAsString(),
+                json.get("amount").getAsDouble(),
+                LocalDateTime.now()
+        );
+        orderRepository.save(order);
+        System.out.println("✅ Orden persistida: " + order.getPaymentId());
     }
 }
